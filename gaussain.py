@@ -2,7 +2,7 @@ import math
 import matplotlib.pyplot as plt
 
 
-class Gaussian():
+class Gaussian:
     """ Gaussian distribution class for calculating and
     visualizing a Gaussian distribution.
 
@@ -140,6 +140,7 @@ class Gaussian():
         return (1.0 / (self.stdev * math.sqrt(2 * math.pi))) * math.exp(-0.5 * ((x - self.mean) / self.stdev) ** 2)
 
     def plot_histogram_pdf(self, n_spaces=50):
+
         """Method to plot the normalized histogram of the data and a plot of the
         probability density function along the same range
 
@@ -189,3 +190,36 @@ class Gaussian():
         plt.show()
 
         return x, y
+
+    def __add__(self, other):
+
+        """Function to add together two Gaussian distributions
+
+        Args:
+            other (Gaussian): Gaussian instance
+
+        Returns:
+            Gaussian: Gaussian distribution
+
+        """
+
+        result = Gaussian()
+        result.mean = self.mean + other.mean
+        result.stdev = math.sqrt(self.stdev ** 2 + other.stdev ** 2)
+
+        return result
+
+    def __repr__(self):
+
+        """Function to output the characteristics of the Gaussian instance
+
+        Args:
+            None
+
+        Returns:
+            string: characteristics of the Gaussian
+
+        """
+
+        return "mean {}, standard deviation {}".format(self.mean, self.stdev)
+
